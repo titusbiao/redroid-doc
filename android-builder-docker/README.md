@@ -34,17 +34,17 @@ docker --version && docker ps -as
 ```
 mkdir ~/redroid && cd ~/redroid
 
-# check supported branch in https://github.com/remote-android/redroid-patches.git
+# check supported branch in https://github.com/titusbiao/redroid-patches.git
 repo init -u https://android.googlesource.com/platform/manifest --git-lfs --depth=1 -b android-12.0.0_r34
 
 # add local manifests
-git clone https://github.com/remote-android/local_manifests.git ~/redroid/.repo/local_manifests -b 12.0.0
+git clone https://github.com/titusbiao/local_manifests.git ~/redroid/.repo/local_manifests -b 12.0.0
 
 # sync code | ~100GB of data | ~20 minutes on a fast CPU + connection
 repo sync -c -j$(nproc)
 
 # get latest Dockerfile from Redroid repository
-wget https://raw.githubusercontent.com/remote-android/redroid-doc/master/android-builder-docker/Dockerfile
+wget https://raw.githubusercontent.com/titusbiao/redroid-doc/master/android-builder-docker/Dockerfile
 
 # check if 'Webview.apk' files were properly synced by 'git-lfs'. Each .apk should be at least ~80MB in size.
 find ~/redroid/external/chromium-webview -type f -name "*.apk" -exec du -h {} +
@@ -102,7 +102,7 @@ find ~/redroid/external/chromium-webview -type f -name "*.apk" -exec du -h {} +
 #### 4) Apply Redroid patches, create builder and start it
 ```
 # apply redroid patches
-git clone https://github.com/remote-android/redroid-patches.git ~/redroid-patches
+git clone https://github.com/titusbiao/redroid-patches.git ~/redroid-patches
 ~/redroid-patches/apply-patch.sh ~/redroid
 
 docker buildx create --use
